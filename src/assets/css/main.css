@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@600&family=Poppins&family=Roboto:wght@300&display=swap');
+#claimbar{
+    background-color: #F7F7F7;
+    border:1px solid #EFEEF4
+}
+#activebtn{
+    background-color: #1EBBD9;
+    color:#FFFFFF;
+    font-size: 16px;
+}
+#notactive{
+    background-color: #FFFFFF;
+    border:1px solid #B5C1C4;
+    color:#10242B;
+    font-size: 16px;
+    letter-spacing: 0;
+    padding: 10px;
+    margin:0 ;
+}
+#starthead{
+    color:#10242B;
+    font-size:18px;
+    letter-spacing: 0;
+}
+#startheads{
+    color:#10242B;
+    font-size:16px;
+    letter-spacing: 0;
+    font-weight: 500;
+}
+#claimnumber{
+    color:#10242B;
+    font-size: 16px;
+    font-weight: bold;
+}
+#newclaim{
+    color:#D1121B;
+    font-size:16px;
+    font-weight: bold;
+}
+#viewdetails{
+    color:#23B1A9;
+    font-size: 12px;
+}
+#tablehead{
+   background-color:#1EBBD9
+}
+#tableheadtext{
+    color:#FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+}
+#tableicon{
+    color:#FFFFFF
+}
+#abovetext{
+    color:#4C4C4C;
+    font-size: 10px;
+    font-weight:bold
+}
+#require{
+    color:#D1121B
+}
+#subheading{
+    color:#10242B;
+    font-size: 14px;
+
+}
+#simpletable{
+    background-color: #23B1A9;
+    color:#FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+
+}
+#border{
+    border:1px solid #C1C8CC
+}
+#plus{
+    color:#23B1A9;
+    font-size: 14px;
+    font-weight: 500;
+}
+#subsubheading{
+    color:#4C4C4C;
+    font-size: 12px;
+    font-weight: bold;
+}
+#assessmentsheetbtn{
+    background-color:#1EBBD9;
+    color:#F5F6FA;
+    font-size: 14px;
+}
+.btnDanger {
+    box-shadow: 0px 2px 2px #d1121b3d;
+    border: 1px solid #d1121b;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #ffffff;
+   
+  }
+  .btnSuccess {
+    font-size: 14px;  
+  box-shadow: 0px 3px 4px #23B1A93D;
+  border-radius: 4px;
+  }
+  .icon {
+  height:18px;
+    width: 18px;
+  }
