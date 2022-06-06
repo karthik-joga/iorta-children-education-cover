@@ -1,23 +1,23 @@
 <template>
- <div  id="border" class="mt-2">
-            <div id="tablehead" height="30" @click="show=!show">
-                <div class="d-flex align-center mx-5">
-                   <p class=" mt-1" id="tableheadtext">Non-Payable Expenses</p>
-                 <v-spacer></v-spacer>
-                 <v-icon id="tableicon" v-show="show" >mdi-plus-box-outline</v-icon>
-                 <v-icon id="tableicon" v-show="!show">mdi-minus-box</v-icon>
-                 </div>
-            </div>
+ <div  id="border" class="mt-1">
+             <div class="header" @click="hide = !hide">
+          <span id="tableheadtext">Non-Payable Expenses </span
+          ><v-spacer></v-spacer>
+          <v-icon id="tableicon" v-show="hide"
+            >mdi-plus-box</v-icon
+          >
+          <v-icon id="tableicon" v-show="!hide"
+            >mdi-minus-box</v-icon
+          >
+        </div>
         
-    <div v-show="!show">
-                 <v-form>
-            <v-layout wrap class="pt-4 form-group-container">
+    <div v-show="!hide">
+                <v-form>
+            <v-layout wrap class="mx-3 pt-4">
               <!-- ------------------------------ROW -1 ------------------------------ -->
-              <v-flex lg2 class="form-group expense-input ma-2">
-                  <v-card class="pa-5 xl6"  height="70">
-               <input type="checkbox" style="margin-right:5px" ><span style="color:#152F38;font-size:12px">Non payable Expense</span>
-                </v-card>
-              </v-flex>
+              <v-card class="npe-checkbox rounded-0" outlined elevation="1">
+                <v-checkbox label="Non Payable Expense"> </v-checkbox>
+              </v-card>
             </v-layout>
           </v-form>
           <!-- ------------------------------------NON payable Expense table--------------------- -->
@@ -34,16 +34,16 @@
             >
             
            <template v-slot:[`item.invoice`]="{ item }">
- <v-text-field label="1000" outlined dense class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
+ <v-text-field label="1000" outlined solo dense class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
 </template>
 <template v-slot:[`item.invoicedate`]="{ item }">
- <v-text-field label="1000" outlined dense class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
+ <v-text-field label="1000" outlined solo dense class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
 </template>
 <template v-slot:[`item.invoicedetails`]="{ item }">
- <v-text-field placeholder="Enter..." outlined dense class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
+ <v-text-field placeholder="Enter..." outlined solo dense class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
 </template>
 <template v-slot:[`item.invoiceamount`]="{ item }">
- <v-text-field label="1000" outlined dense class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
+ <v-text-field label="1000" outlined dense solo class="mt-2 input" style="align-text:center"></v-text-field>{{ item.text }}
 </template>
 <template v-slot:[`item.action`]="{ item }">
  <v-icon class="red--text">mdi-delete</v-icon>{{ item.text }}
@@ -81,7 +81,7 @@
 export default {
     data() {
         return{
-            show:false,
+            hide:false,
            
              headers: [
           {
@@ -106,6 +106,9 @@ export default {
 }
 </script>
 <style>
+.form-group{
+  width:250px
+}
 .input{
 border-radius:0px
 }
@@ -124,5 +127,14 @@ border-radius:0px
 .v-data-table__wrapper table tbody tr td{
    border-left:1px solid #C1C8CC;
    height:20px
+}
+.npe-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  width: 220px;
+  padding-left: 10px;
+  border: 1px solid #c1c8cc;
 }
 </style>

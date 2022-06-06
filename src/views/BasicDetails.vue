@@ -7,20 +7,24 @@
         </div>
         <!-- basic details -->
         <div  id="border" >
-            <div id="tablehead" height="30" @click="show=!show">
-                <div class="d-flex align-center mx-5">
-                 <p class=" mt-1 font-weight-bold" id="tableheadtext">Basic Details</p>
-                 <v-spacer></v-spacer>
-                 <v-icon id="tableicon" v-show="show" >mdi-plus-box-outline</v-icon>
-                 <v-icon id="tableicon" v-show="!show">mdi-minus-box</v-icon>
-                 </div>
-            </div>
-                 <div class="ml-0 "  v-show="!show" color="#FFFFFF">
+            <div class="header" @click="hide = !hide">
+          <span >Basic Details </span
+          ><v-spacer></v-spacer>
+          <v-icon id="tableicon" v-if="hide"
+            >mdi-plus-box</v-icon
+          >
+          <v-icon id="tableicon" v-show="!hide"
+            >mdi-minus-box</v-icon
+          >
+        </div>
+                 <div class="ml-0 "  v-show="!hide" color="#FFFFFF">
+
                     <v-layout wrap class="pt-4 form-group-container">
-                        <v-flex class="form-group ma-3">
+                        <v-flex class="form-group mx-3 ">
                          <label class="form-label"> 
                            <p  id="abovetext">Incident Details
                              <span id="require">*</span></p> </label>
+                        
                         <v-text-field
                              class="input"
                                  label="Enter..."
@@ -31,35 +35,63 @@
                          ></v-text-field>
                      </v-flex>
 
-                <v-flex class="form-group ma-3">
-                  <label class="form-label"> 
-                    <p  id="abovetext">Place Of Death</p> </label>
-                    
-                  <v-text-field
-                    class="input"
-                    label="DD/MM/YYYY"
-                    solo
-                    prepend-inner-icon="mdi-calendar"
-                    dense
-                    outlined
-                    
-                  ></v-text-field>
+                <v-flex class="form-group mx-3">
+                  <label class="form-label"
+                  > <p  id="abovetext">Place Of Death</p> </label>
+                <v-menu
+                  ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :return-value.sync="date"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      placeholder="DD/MM/YYYY"
+                      class="form-control rounded-0"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      solo
+                      dense
+                      outlined
+                    >
+                      <template v-slot:prepend-inner>
+                        <v-icon class="iconstyle"> mdi-calendar </v-icon>
+                      </template>
+                    </v-text-field>
+                  </template>
+                  <v-date-picker v-model="date" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false">
+                      Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="$refs.menu.save(date)">
+                      OK
+                    </v-btn>
+                  </v-date-picker>
+                </v-menu>
                 </v-flex>
 
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p  id="abovetext">Time Of Death</p> </label>
                   <v-select
                     
                     label="Enter..."
                     solo
-                    prepend-inner-icon="mdi-clock"
-                      class="input"
+                    class="input"
                     dense
                     outlined
-                  ></v-select>
+                  >
+                 <template v-slot:prepend-inner>
+                        <v-icon class="iconstyle"> mdi-clock </v-icon>
+                      </template></v-select>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p  id="abovetext">Name Of The Claimant
                        <span id="require">*</span></p> </label>
@@ -71,7 +103,7 @@
                     outlined
                   ></v-select>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                     <p  id="abovetext"> Hospitalisation Required </p></label>
                   <v-select
@@ -85,13 +117,12 @@
                 </v-layout>
 
                     
-                <div >
-                    <v-col cols="12" sm="2" md="2">
+                <v-card width="235" flat class="ml-3 " >
+                    
                        <p  id="abovetext">Is this an Accident Case?</p>
-                       <v-select solo dense
+                       <v-select solo dense outlined class="input"
                        label="Yes"></v-select>
-                       </v-col>
-                   </div>
+                   </v-card>
             <!--Add Dependent Details-->
                 <div >
                   <div class="d-flex">
@@ -107,10 +138,10 @@
             :items="item"
             :headers="headers">
                     <template v-slot:[`item.DependantName`]="{ item }">
- <v-text-field  class="input mt-2" label="chronic airway obstruction, not elsewhere classified" outlined dense  style="align-text:center"></v-text-field>{{ item.text }}
+ <v-text-field  class="input mt-2" label="chronic airway obstruction, not elsewhere classified" outlined solo dense  style="align-text:center"></v-text-field>{{ item.text }}
 </template>
 <template v-slot:[`item.DependantChild`]="{ item }">
- <v-text-field  class="input mt-2" label="chronic airway obstruction, not elsewhere classified" outlined dense  style="align-text:center"></v-text-field>{{ item.text }}
+ <v-text-field  class="input mt-2" label="chronic airway obstruction, not elsewhere classified" outlined dense  solo style="align-text:center"></v-text-field>{{ item.text }}
 </template>
 <template v-slot:[`item.action`]="{ item }">
  <v-icon class="red--text">mdi-delete</v-icon>{{ item.text }}
@@ -132,10 +163,11 @@
 </template>
 
 <script>
+import "../assets/css/main.css"
     export default {
         data() {
             return{
-                show:false,
+                hide:false,
                   headers: [
           {
             text: 'Sr No.',

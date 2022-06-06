@@ -1,23 +1,27 @@
 <template>
 <div>
   <v-app>
-    <div class="mt-3">
-        <div class="d-flex " id="claimbar"  >
-            <p class=" align-center font-weight-bold mt-3 mx-5" id="claimnumber" >Claim Number - 4340002739</p>
+    <div class="mt-3" >
+          <div class="grey  d-flex   lighten-3" id="claimbar">
+            <p class=" align-center mt-3 mx-5" id="claimnumber">Claim Number - 4340002739</p>
             <v-divider vertical class="my-2"></v-divider>
-            <p class=" font-weight-bold  darken-3 mt-3 mx-5" id="newclaim" >NEW CLAIM</p>
+            <p class=" mt-3 mx-5" id="newclaim">FEATURE CLAIM</p>
             <v-spacer></v-spacer>
-            <p class=" mt-3 mr-5" id="viewdetails">View Details</p>
+            <p class=" mt-4 mr-5" id="viewdetails">View Details</p>
         </div>
        
     </div>
+
+
      <div class="mt-3">
-            <v-btn class=" pa-5 mr-1 text-subtitle-2" id="activebtn" elevation="0" > Claim Details</v-btn>
+            <v-btn class="pa-5 mr-1 text-subtitle-2" id="activebtn" elevation="0" > Claim Details</v-btn>
+            
          <router-link to="/assess" style="text-decoration:none">
-         <v-btn outlined id="notactive"  
+         <v-btn outlined id="notactive" class="pa-5" 
           elevation="0">
          Assessment Sheet</v-btn></router-link>
-            <v-divider class="mr-16"></v-divider>
+         
+            <v-divider class="mx-16"></v-divider>
         </div>
         
         <BasicDetails/>
@@ -77,7 +81,8 @@ import BasicDetails from './BasicDetails.vue'
     }
 </script>
 
-<style scoped>
+<style >
+
 .kart {
     border-radius: 0px;
 }

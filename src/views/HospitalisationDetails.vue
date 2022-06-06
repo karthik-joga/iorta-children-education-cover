@@ -1,19 +1,20 @@
 <template>
     <div>
-<div id="border" class="mt-2">
-            <div id="tablehead" height="30" @click="show=!show">
-                <div class="d-flex align-center mx-5">
-                   <p id="tableheadtext">Hospitalisation Details</p>
-                 <v-spacer></v-spacer>
-                 <v-icon id="tableicon" v-show="show" >mdi-plus-box-outline</v-icon>
-                 <v-icon id="tableicon" v-show="!show">mdi-minus-box</v-icon>
-                 
-                 </div>
-                 </div>
-                 <div v-show="!show">
+<div id="border" class="mt-1">
+            <div class="header" @click="hide = !hide">
+          <span class="header-label-basic">Hospitalisation Details </span
+          ><v-spacer></v-spacer>
+          <v-icon id="tableicon" v-show="hide"
+            >mdi-plus-box</v-icon
+          >
+          <v-icon id="tableicon" v-show="!hide"
+            >mdi-minus-box</v-icon
+          >
+        </div>
+                 <div v-show="!hide">
                       <v-form>
               <v-layout wrap class="pt-4 form-group-container">
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label"> 
                     <p id="abovetext">Hospital Name</p> </label>
                   <v-text-field
@@ -25,7 +26,7 @@
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">PRN (Hospital)</p> </label>
                   <v-text-field
@@ -34,9 +35,10 @@
                     solo
                     dense
                     outlined
+                    disabled
                   ></v-text-field>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Hospital Alias Name</p> </label>
                   <v-select
@@ -47,7 +49,7 @@
                     outlined
                   ></v-select>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Rohini Code</p> </label>
                   <v-select
@@ -58,7 +60,7 @@
                     outlined
                   ></v-select>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                     <p id="abovetext"> Hospital Status </p></label>
                   <v-text-field
@@ -72,7 +74,7 @@
               </v-layout>
 
               <v-layout wrap class="pt-4 form-group-container">
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label"> 
                     <p id="abovetext">Hospital Flag</p> </label>
                   <v-text-field
@@ -84,7 +86,7 @@
                   ></v-text-field>
                 </v-flex>
 
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Hospital Type</p> </label>
                   <v-select
@@ -95,67 +97,124 @@
                     outlined
                   ></v-select>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Date of Admission</p> </label>
-                  <v-text-field
-                    class="input"
-                    label="DD/MM/YYYY"
-                    prepend-inner-icon="mdi-calendar"
-                    solo
-                    dense
-                    outlined
-                  ></v-text-field>
+                  <v-menu
+                  ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :return-value.sync="date"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      placeholder="DD/MM/YYYY"
+                      class="form-control rounded-0"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      solo
+                      dense
+                      outlined
+                    >
+                      <template v-slot:prepend-inner>
+                        <v-icon class="iconstyle"> mdi-calendar </v-icon>
+                      </template>
+                    </v-text-field>
+                  </template>
+                  <v-date-picker v-model="date" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false">
+                      Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="$refs.menu.save(date)">
+                      OK
+                    </v-btn>
+                  </v-date-picker>
+                </v-menu>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Time of Admission</p> </label>
                   <v-select
                     class="input"
                     label="Enter"
-                    prepend-inner-icon="mdi-clock"
                     solo
                     dense
                     outlined
-                  ></v-select>
+                  ><template v-slot:prepend-inner>
+                        <v-icon class="iconstyle"> mdi-clock </v-icon>
+                      </template></v-select>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                     <p id="abovetext"> Date Of Discharge </p></label>
-                  <v-text-field
-                    class="input"
-                    label="DD/MM/YYYY"
-                    prepend-inner-icon="mdi-calendar"
-                    solo
-                    dense
-                    outlined
-                  ></v-text-field>
+                  <v-menu
+                  ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :return-value.sync="date"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      placeholder="DD/MM/YYYY"
+                      class="form-control rounded-0"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      solo
+                      dense
+                      outlined
+                    >
+                      <template v-slot:prepend-inner>
+                        <v-icon class="iconstyle"> mdi-calendar </v-icon>
+                      </template>
+                    </v-text-field>
+                  </template>
+                  <v-date-picker v-model="date" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false">
+                      Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="$refs.menu.save(date)">
+                      OK
+                    </v-btn>
+                  </v-date-picker>
+                </v-menu>
                 </v-flex>
               </v-layout>
               <v-layout wrap class="pt-4 form-group-container">
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3 ">
                   <label class="form-label">
                      <p id="abovetext">Time of Discharge</p> </label>
                   <v-select
                     class="input"
                     label="Enter"
-                    prepend-inner-icon="mdi-clock"
                     solo
                     dense
                     outlined
-                  ></v-select>
+                  ><template v-slot:prepend-inner>
+                        <v-icon class="iconstyle"> mdi-clock </v-icon>
+                      </template></v-select>
                 </v-flex>
 
-                <v-flex class="form-group ma-2 px-10 pt-2">
-                  <!-- <label class="form-label"> <b>PRN (Hospital)</b> </label> -->
-                  <v-card width="150"><input type="checkbox"  class="ma-6" color="black"
-                   checked/>if PED
-                        
-                  
-                    
+                <v-flex class="form-group mt-2 mx-3 pt-7">
+                  <v-card hide-details class="my-auto" height="63%" style="border-radius:0 ; border:1px solid black">
+                  <v-checkbox   color="black" outlined class="pa-0 ma-2 ml-3"
+                     v-model="check" label="If PED"> </v-checkbox>
+                    <!--  -->
                   </v-card>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Icd Code</p> </label>
                   <v-text-field
@@ -166,7 +225,7 @@
                     outlined
                   ></v-text-field>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Short Description</p> </label>
                   <v-select
@@ -177,7 +236,7 @@
                     outlined
                   ></v-select>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                     <p id="abovetext">Long Description </p></label>
                   <v-select
@@ -201,7 +260,8 @@
             :items="item"
             :headers="headers">
                     <template v-slot:[`item.Diagnosis`]="{ item }">
- <v-text-field label="chronic airway obstruction, not elsewhere classified" outlined dense class="mt-2" style="align-text:center"></v-text-field>{{ item.text }}
+ <v-text-field label="chronic airway obstruction, not elsewhere classified" solo dense outlined
+ class="mt-2" style="align-text:center ;"></v-text-field>{{ item.text }}
 </template>
 
 <template v-slot:[`item.action`]="{ item }">
@@ -216,7 +276,7 @@
             <div>
                 <p id="subsubheading" class="ml-5">Procedure Codes</p>
                 <v-layout wrap class="pt-3 form-group-container">
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Procedure Code Level 1 & Text</p> </label>
                   <v-text-field
@@ -227,7 +287,7 @@
                     outlined
                   ></v-text-field>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Procedure Code Level 2 & Text</p> </label>
                   <v-text-field
@@ -238,7 +298,7 @@
                     outlined
                   ></v-text-field>
                 </v-flex>
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label">
                      <p id="abovetext">Procedure Code Level 3 & Text</p> </label>
                   <v-text-field
@@ -251,7 +311,7 @@
                 </v-flex>
                 </v-layout>
                  <v-layout wrap class="pt-4 form-group-container">
-                <v-flex class="form-group ma-3">
+                <v-flex class="form-group mx-3">
                   <label class="form-label"> 
                     <p id="abovetext">Medical History <span class="red--text">*</span> </p></label>
                   <v-text-field
@@ -279,7 +339,8 @@ import AccidentDetails from "./AccidentDetails.vue"
       },
         data () {
           return {
-            show:false,
+            hide:false,
+            check:true,
              headers: [
           {
             text: 'Sr No.',

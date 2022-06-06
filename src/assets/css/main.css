@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@600&family=Poppins&family=Roboto:wght@300&display=swap');
 #claimbar{
     background-color: #F7F7F7;
-    border:1px solid #EFEEF4
+    border:1px solid #EFEEF4;
+    
 }
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #1ebbd9;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 20px;
+    height: 36px;
+  }
 #activebtn{
     background-color: #1EBBD9;
     color:#FFFFFF;
@@ -43,19 +54,27 @@
     font-size: 12px;
 }
 #tablehead{
-   background-color:#1EBBD9
+   background-color:#1EBBD9;
+
 }
 #tableheadtext{
     color:#FFFFFF;
     font-size: 14px;
     font-weight: bold;
+   margin-top: 10px;
 }
+/* #middle{
+    display: flex;
+    text-align: center;
+    height: 36px;
+    margin:auto 0
+} */
 #tableicon{
     color:#FFFFFF
 }
 #abovetext{
     color:#4C4C4C;
-    font-size: 10px;
+    font-size: 13px;
     font-weight:bold
 }
 #require{
@@ -107,4 +126,12 @@
   .icon {
   height:18px;
     width: 18px;
+  }
+  .iconstyle {
+    border-right: 1px solid grey;
+    background-color: #F7F7F7;
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    margin-left: -12px;
   }

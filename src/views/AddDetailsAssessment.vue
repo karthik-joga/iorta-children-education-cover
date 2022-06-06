@@ -12,18 +12,23 @@
     </div>
     <div>
     <div  id="border" >
-            <div id="tablehead" height="30" @click="hide=!hide">
-                <div class="d-flex align-center mx-5"> <p id="tableheadtext">Basic Details</p>
-                 <v-spacer></v-spacer>
-                 <v-icon id="tableicon" v-show="hide" >mdi-plus-box-outline</v-icon>
-                 <v-icon id="tableicon" v-show="!hide">mdi-minus-box</v-icon>
-                 </div>
+             <div  id="border" >
+            <div class="header" @click="hide = !hide">
+          <span >Basic Details </span
+          ><v-spacer></v-spacer>
+          <v-icon id="tableicon" v-show="hide"
+            >mdi-plus-box</v-icon
+          >
+          <v-icon id="tableicon" v-show="!hide"
+            >mdi-minus-box</v-icon
+          >
+        </div>
             </div>
                  <div v-show="!hide">
                     <div>
                       
                      <v-layout wrap class="pt-4 form-group-container">
-                        <v-flex class="form-group ma-3">
+                        <v-flex class="form-group mx-3">
                          <label class="form-label">
                             <p id="abovetext">Settlement Type<span id="require">*</span></p> </label>
                         <v-select
@@ -35,7 +40,7 @@
                                  
                          ></v-select>
                      </v-flex>
-                      <v-flex class="form-group ma-3">
+                      <v-flex class="form-group mx-3">
                          <label class="form-label"> 
                            <p id="abovetext">Claim Payment Type<span id="require">*</span></p> </label>
                         <v-select
@@ -46,7 +51,7 @@
                                  outlined
                                  
                          ></v-select>
-                     </v-flex> <v-flex class="form-group ma-3">
+                     </v-flex> <v-flex class="form-group mx-3">
                          <label class="form-label"> 
                            <p id="abovetext">Transaction Type<span id="require">*</span></p> </label>
                          <v-select
@@ -58,7 +63,7 @@
                                  
                          ></v-select>
                      </v-flex>
-                      <v-flex class="form-group ma-3">
+                      <v-flex class="form-group mx-3">
                          <label class="form-label"> 
                            <p id="abovetext">Country Name<span id="require">*</span></p> </label>
                          <v-select
@@ -70,7 +75,7 @@
                                  
                          ></v-select>
                      </v-flex>
-                      <v-flex class="form-group ma-3">
+                      <v-flex class="form-group mx-3">
                          <label class="form-label">
                             <p id="abovetext">Currency Name
                               <span id="require">*</span></p> </label>
@@ -87,7 +92,7 @@
                      
                      <!--second row-->
                      
-             <v-flex lg2 class="align mx-3">
+             <v-card flat class="card-group mx-3">
                 <label class="form-label">
                   <p id="abovetext">Rate Of Exchange
                     <span id="require">*</span></p>
@@ -101,25 +106,54 @@
                   outlined
                   disabled
                 ></v-text-field>
-              </v-flex>
+              </v-card>
 
-              <v-flex lg2 class="mx-8" >
+              <v-card flat class="card-group mx-3" >
                 
                 <label class="form-label">
                   <p id="abovetext">Rate Of Exchange Date<span id="require">*</span></p>
                   
                 </label>
-                <v-text-field
-                  class="input"
-                  label="12/01/2021"
-                  solo
-                  dense
-                  outlined
-                  prepend-inner-icon="mdi-calendar"
+               <v-menu
+                  ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :return-value.sync="date"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
                   disabled
-                ></v-text-field>
-              </v-flex>
-              <v-flex lg2 class="form-group mx-3">
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      placeholder="DD/MM/YYYY"
+                      class="form-control rounded-0"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      solo
+                      dense
+                      outlined
+                    >
+                      <template v-slot:prepend-inner>
+                        <v-icon class="iconstyle"> mdi-calendar </v-icon>
+                      </template>
+                    </v-text-field>
+                  </template>
+                  <v-date-picker v-model="date" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false">
+                      Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="$refs.menu.save(date)">
+                      OK
+                    </v-btn>
+                  </v-date-picker>
+                </v-menu>
+              </v-card>
+
+              <v-card flat class="card-group mx-3">
                 <label class="form-label">
                   <p id="abovetext">ROE Updated Manually<span id="require">*</span></p>
                   
@@ -132,7 +166,7 @@
                   outlined
                   disabled
                 ></v-text-field>
-              </v-flex>
+              </v-card>
             
           </v-layout> 
         </div>
@@ -209,5 +243,8 @@ export default {
 }
 .align{
   width:300px
+}
+.card-group{
+  width:235px
 }
 </style>
